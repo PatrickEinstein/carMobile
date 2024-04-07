@@ -27,10 +27,10 @@ const App = () => {
     "Nunito-Bold": require("./assets/fonts/Nunito-Bold.ttf"),
     "Nunito-ExtraBold": require("./assets/fonts/Nunito-ExtraBold.ttf"),
     "Nunito-Black": require("./assets/fonts/Nunito-Black.ttf"),
+    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
     "Inter-Light": require("./assets/fonts/Inter-Light.ttf"),
     "Inter-Regular": require("./assets/fonts/Inter-Regular.ttf"),
     "Inter-SemiBold": require("./assets/fonts/Inter-SemiBold.ttf"),
-    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
   });
 
   if (!fontsLoaded && !error) {
@@ -41,48 +41,9 @@ const App = () => {
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen
-              name="Welcome"
-              component={Welcome}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Filter"
-              component={Filter}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="MotorsListing"
-              component={MotorsListing}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="MoreDetails"
-              component={MoreDetails}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Chats"
-              component={Chats}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Messenger"
-              component={Messenger}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="LoginScreenThis"
-              component={LoginScreenThis}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
+          <Stack.Navigator
+            screenOptions={{ headerShown: false }}
+          ></Stack.Navigator>
         ) : null}
       </NavigationContainer>
     </>

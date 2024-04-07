@@ -334,9 +334,9 @@ const styles = StyleSheet.create({
     left: 0,
     borderRadius: Border.br_13xl,
     backgroundColor: Color.white,
-    width: 393,
     position: "absolute",
     height: 710,
+    width: 393,
   },
   aed99000: {
     fontSize: FontSize.size_xl,
@@ -613,9 +613,8 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   moreDetails: {
-    flex: 1,
-    width: "100%",
     height: 710,
+    width: 393,
   },
 });
 

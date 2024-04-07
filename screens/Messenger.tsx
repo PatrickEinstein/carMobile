@@ -475,8 +475,8 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   icon: {
-    height: "100%",
     width: "100%",
+    height: "100%",
   },
   arrowLeft: {
     left: 44,
@@ -595,10 +595,10 @@ const styles = StyleSheet.create({
     color: Color.gray900,
     fontFamily: FontFamily.paragraphMDSemibold,
     lineHeight: 22,
+    flex: 1,
     fontWeight: "600",
     fontSize: FontSize.paragraphMDRegular_size,
     textAlign: "left",
-    flex: 1,
   },
   hint: {
     lineHeight: 19,
@@ -638,10 +638,10 @@ const styles = StyleSheet.create({
     height: 12,
   },
   typeYourMessage: {
+    flex: 1,
     color: Color.gray400,
     fontFamily: FontFamily.nunitoRegular,
     textAlign: "left",
-    flex: 1,
   },
   placeholderContainer: {
     marginLeft: 12,
@@ -653,8 +653,8 @@ const styles = StyleSheet.create({
     color: Color.gray900,
     lineHeight: 22,
     fontFamily: FontFamily.paragraphXSRegular,
-    fontSize: FontSize.paragraphMDRegular_size,
     flex: 1,
+    fontSize: FontSize.paragraphMDRegular_size,
   },
   valueContainer: {
     marginLeft: 12,
@@ -802,9 +802,9 @@ const styles = StyleSheet.create({
     color: Color.lightText,
     lineHeight: 22,
     fontSize: FontSize.textAutoSuggestion_size,
+    flex: 1,
     textAlign: "center",
     fontFamily: FontFamily.textSmall,
-    flex: 1,
   },
   divider: {
     borderColor: Color.lightText,
@@ -866,18 +866,18 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
     shadowColor: "rgba(0, 0, 0, 0.3)",
     borderRadius: Border.br_8xs,
+    flex: 1,
     shadowOpacity: 1,
     shadowOffset: {
       width: 0,
       height: 4,
     },
-    flex: 1,
     backgroundColor: Color.white,
   },
   letters: {
     marginLeft: 14.3,
-    flexDirection: "row",
     flex: 1,
+    flexDirection: "row",
   },
   key8: {
     marginLeft: 14.3,
@@ -907,10 +907,10 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: Border.br_5xl,
     borderBottomLeftRadius: Border.br_5xl,
     backgroundColor: Color.colorLightgray_200,
-    width: 393,
     justifyContent: "flex-end",
     paddingTop: Padding.p_8xs,
     alignItems: "center",
+    width: 393,
   },
   notchIcon: {
     height: "70.21%",
@@ -982,8 +982,7 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_13xl,
     height: 852,
     overflow: "hidden",
-    width: "100%",
-    flex: 1,
+    width: 393,
     backgroundColor: Color.white,
   },
 });

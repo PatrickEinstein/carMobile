@@ -228,9 +228,9 @@ const styles = StyleSheet.create({
   icon2: {
     top: 48,
     left: 0,
-    width: 393,
     height: 360,
     position: "absolute",
+    width: 393,
   },
   notchIcon: {
     height: "70.21%",
@@ -336,10 +336,9 @@ const styles = StyleSheet.create({
   },
   welcome: {
     borderRadius: Border.br_13xl,
-    flex: 1,
-    width: "100%",
     height: 852,
     overflow: "hidden",
+    width: 393,
   },
 });
 

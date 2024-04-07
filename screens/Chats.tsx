@@ -243,9 +243,9 @@ const styles = StyleSheet.create({
   },
   chatsChild: {
     backgroundColor: Color.statusDanger100,
-    width: 393,
     height: 88,
     left: 0,
+    width: 393,
   },
   chatsItem: {
     borderStyle: "solid",
@@ -492,10 +492,9 @@ const styles = StyleSheet.create({
   },
   chats: {
     borderRadius: Border.br_13xl,
-    flex: 1,
-    width: "100%",
     height: 852,
     overflow: "hidden",
+    width: 393,
     backgroundColor: Color.white,
   },
 });

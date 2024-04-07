@@ -973,8 +973,7 @@ const styles = StyleSheet.create({
   },
   home: {
     borderRadius: Border.br_13xl,
-    flex: 1,
-    width: "100%",
+    width: 393,
     height: 852,
     overflow: "hidden",
     backgroundColor: Color.white,

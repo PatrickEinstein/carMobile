@@ -547,10 +547,10 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   slider: {
+    flex: 1,
     backgroundColor: Color.gray200,
     height: 4,
     borderRadius: Border.br_980xl,
-    flex: 1,
   },
   contentContainer: {
     alignSelf: "stretch",
@@ -706,10 +706,9 @@ const styles = StyleSheet.create({
   },
   filter: {
     borderRadius: Border.br_13xl,
-    width: "100%",
+    width: 393,
     height: 852,
     overflow: "hidden",
-    flex: 1,
   },
 });
 

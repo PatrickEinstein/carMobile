@@ -397,7 +397,7 @@ const MotorsListing = () => {
             source={require("../assets/home.png")}
           />
           <LinearGradient
-            style={[styles.homeChild, styles.homeChildPosition]}
+            style={styles.homeChild}
             locations={[0, 1]}
             colors={["#fd312c", "#fc6242"]}
           />
@@ -414,9 +414,9 @@ const styles = StyleSheet.create({
   },
   bodyLayout: {
     height: 2,
-    width: 393,
     left: 0,
     position: "absolute",
+    width: 393,
   },
   listingLayout: {
     height: 432,
@@ -452,8 +452,8 @@ const styles = StyleSheet.create({
   innerPosition: {
     left: -14,
     height: 2,
-    width: 393,
     position: "absolute",
+    width: 393,
   },
   headerLayout: {
     width: 360,
@@ -536,10 +536,6 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     position: "absolute",
-  },
-  homeChildPosition: {
-    left: 0,
-    top: 0,
   },
   bodyChild: {
     top: 974,
@@ -741,9 +737,9 @@ const styles = StyleSheet.create({
   body: {
     top: 89,
     height: 655,
-    width: 393,
     left: 0,
     position: "absolute",
+    width: 393,
   },
   searchDuotoneIcon: {
     left: 264,
@@ -961,6 +957,7 @@ const styles = StyleSheet.create({
     height: 4,
     top: 0,
     backgroundColor: Color.zonesso3,
+    left: 0,
     position: "absolute",
   },
   home: {
@@ -985,10 +982,9 @@ const styles = StyleSheet.create({
   },
   motorsListing: {
     borderRadius: Border.br_13xl,
-    flex: 1,
     height: 852,
     overflow: "hidden",
-    width: "100%",
+    width: 393,
   },
 });
 
