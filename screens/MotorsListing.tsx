@@ -7,19 +7,21 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const MotorsListing = () => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
-  const [motorsList, setMotorList] = React.useState([{
-    _id:"",
-    name: "",
-    price: "",
-    location: "",
-    createdBy: "",
-    description: "",
-    category: "",
-    image: "",
-    video: "",
-    createdAt: "",
-    updatedAt: "",
-  }]);
+  const [motorsList, setMotorList] = React.useState([
+    {
+      _id: "",
+      name: "",
+      price: "",
+      location: "",
+      createdBy: "",
+      description: "",
+      category: "",
+      image: "",
+      video: "",
+      createdAt: "",
+      updatedAt: "",
+    },
+  ]);
 
   const load = {
     page: 1,
@@ -95,6 +97,8 @@ const MotorsListing = () => {
                 <Text style={styles.price}>Price: ${price}</Text>
                 <Text style={styles.location}>Location: {location}</Text>
                 <Text style={styles.description}>{description}</Text>
+                <Text style={styles.description}>{category}</Text>
+                <Text style={styles.description}>{createdBy}</Text>
               </View>
             </View>
           );
