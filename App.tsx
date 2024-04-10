@@ -15,7 +15,8 @@ import UIUXText from "./components/UIUXText";
 import LoginScreenThis from "./screens/LoginScreenThis";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import SignUp from "./screens/SignUp";
+import SignIn from "./screens/SignIn";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -41,9 +42,17 @@ const App = () => {
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
-          <Stack.Navigator
-            screenOptions={{ headerShown: false }}
-          ></Stack.Navigator>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Chats" component={Chats} />
+            <Stack.Screen name="Messenger" component={Messenger} />
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="index" component={Welcome} />
+            <Stack.Screen name="Filter" component={Filter} />
+            <Stack.Screen name="MotorsListing" component={MotorsListing} />
+            <Stack.Screen name="LoginScreenThis" component={MoreDetails} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="SignIn" component={SignIn} />
+          </Stack.Navigator>
         ) : null}
       </NavigationContainer>
     </>

@@ -1,10 +1,96 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import ButtonStatus from "../components/ButtonStatus";
 import { Color, Padding, Border, FontSize, FontFamily } from "../GlobalStyles";
+import * as WebBrowser from "expo-web-browser";
+import * as Facebook from "expo-auth-session/providers/facebook";
+import * as Google from "expo-auth-session/providers/google";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation, ParamListBase } from "@react-navigation/native";
+WebBrowser.maybeCompleteAuthSession();
 
 const Welcome = () => {
+  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
+
+  const [request, response, promptAsync] = Facebook.useAuthRequest({
+    clientId: "334492429005026",
+  });
+  const [Grequest, Gresponse, GpromptAsync] = Google.useAuthRequest({
+    androidClientId:
+      "276191175383-fitfq7bqkbi3bp7irol7vk8u7e96aro5.apps.googleusercontent.com",
+    iosClientId:
+      "276191175383-7mke6hp95aibh2bt1ne8vc1lhv3omk70.apps.googleusercontent.com",
+    // webClientId:
+    //   "276191175383-chv89i65r0p35hck2vd6pbqlaa6dsin4.apps.googleusercontent.com",
+  });
+
+  // FACEBOOK API
+  React.useEffect(() => {
+    if (
+      response &&
+      response.type === "success" &&
+      response.authentication &&
+      response.authentication.accessToken
+    ) {
+      (async () => {
+        const userInfoResponse = await fetch(
+          `https://graph.facebook.com/me?access_token=${response.authentication.accessToken}&fields=id,name,picture.type(large)`
+        );
+        const userInfo = await userInfoResponse.json();
+      })();
+    }
+    handleSignInWithGoogle();
+  }, [response, Gresponse]);
+
+  // FACEBOOK API
+  const handlePressAsync = async () => {
+    const result = await promptAsync();
+    console.log(`result`, result);
+    if (result.type !== "success") {
+      alert("Uh oh, something went wrong");
+      return;
+    }
+  };
+
+  // GOOGLE API
+  const handleSignInWithGoogle = async () => {
+    const user = await AsyncStorage.getItem("@user");
+    if (!user) {
+      if (Gresponse?.type === "success" && Gresponse.authentication) {
+        await getUserInfo(Gresponse.authentication.accessToken);
+      }
+    } else {
+      //   dispatch(saveLoggedInUser(user));
+    }
+  };
+
+  // GOOGLE API
+  const getUserInfo = async (token: string) => {
+    if (!token) return;
+
+    try {
+      const response = await fetch(
+        "https://www.googleapis.com/userinfo/v2/me",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const user = await response.json();
+      await AsyncStorage.setItem("@user", JSON.stringify(user));
+    } catch (error) {
+      alert("Uh oh, something went wrong");
+    }
+  };
+
   return (
     <View style={[styles.welcome, styles.welcomeBg]}>
       <View style={[styles.apple, styles.appleShadowBox]}>
@@ -13,7 +99,11 @@ const Welcome = () => {
           contentFit="cover"
           source={require("../assets/mail.png")}
         />
-        <Text style={[styles.text, styles.textTypo]}>Continue with Email</Text>
+        <Pressable onPress={() => navigation.navigate("SignIn")}>
+          <Text style={[styles.text, styles.textTypo]}>
+            Continue with Email
+          </Text>
+        </Pressable>
       </View>
       <View style={[styles.facebook, styles.appleShadowBox]}>
         <Image
@@ -21,9 +111,11 @@ const Welcome = () => {
           contentFit="cover"
           source={require("../assets/social-icon.png")}
         />
-        <Text style={[styles.text, styles.textTypo]}>
-          Continue with Facebook
-        </Text>
+        <TouchableOpacity onPress={handlePressAsync}>
+          <Text style={[styles.text, styles.textTypo]}>
+            Continue with Facebook
+          </Text>
+        </TouchableOpacity>
       </View>
       <View style={[styles.google, styles.appleShadowBox]}>
         <Image
@@ -31,16 +123,23 @@ const Welcome = () => {
           contentFit="cover"
           source={require("../assets/social-icon1.png")}
         />
-        <Text style={[styles.text, styles.textTypo]}>Continue with Google</Text>
+        <TouchableOpacity onPress={() => GpromptAsync()}>
+          <Text style={[styles.text, styles.textTypo]}>
+            Continue with Google
+          </Text>
+        </TouchableOpacity>
       </View>
+
       <ButtonStatus button="Create new Account" />
       <View style={styles.buttonStatus}>
         <View style={[styles.iconSolid, styles.iconLayout]}>
           <Text style={[styles.icon, styles.iconFlexBox]}>grin</Text>
         </View>
-        <Text style={[styles.button, styles.logInTypo]}>
-          Sign up as a Business
-        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+          <Text style={[styles.button, styles.logInTypo]}>
+            Sign up as a Business
+          </Text>
+        </TouchableOpacity>
         <View style={[styles.iconSolid1, styles.iconLayout]}>
           <Text style={[styles.icon, styles.iconFlexBox]}>grin</Text>
         </View>
@@ -327,7 +426,7 @@ const styles = StyleSheet.create({
   signUpLater: {
     top: 768,
     left: 148,
-    textDecoration: "underline",
+    // textDecoration: "underline",
     color: Color.statusDanger500,
     fontFamily: FontFamily.nunitoBold,
     fontWeight: "700",

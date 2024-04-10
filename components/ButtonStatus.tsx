@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_base,
     paddingVertical: Padding.p_9xs,
     opacity: 0.85,
-    backgroundColor: Color.zonesso3,
+    // backgroundColor: Color.zonesso3,
     position: "absolute",
   },
 });

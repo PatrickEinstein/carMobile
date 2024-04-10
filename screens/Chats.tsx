@@ -7,8 +7,10 @@ import { useNavigation, ParamListBase } from "@react-navigation/native";
 import Search from "../components/Search";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 
+
 const Chats = () => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
+
 
   return (
     <View style={styles.chats}>
