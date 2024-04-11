@@ -43,15 +43,15 @@ const App = () => {
       <NavigationContainer>
         {hideSplashScreen ? (
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Chats" component={Chats} />
+            {/* <Stack.Screen name="Chats" component={Chats} /> */}
             <Stack.Screen name="Messenger" component={Messenger} />
-            <Stack.Screen name="Home" component={Home} />
+            {/* <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="index" component={Welcome} />
             <Stack.Screen name="Filter" component={Filter} />
             <Stack.Screen name="MotorsListing" component={MotorsListing} />
             <Stack.Screen name="LoginScreenThis" component={MoreDetails} />
             <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="SignIn" component={SignIn} />
+            <Stack.Screen name="SignIn" component={SignIn} /> */}
           </Stack.Navigator>
         ) : null}
       </NavigationContainer>
