@@ -11,15 +11,13 @@ import Buttons from "../components/Buttton";
 
 import { useRouter } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
-
-import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation, ParamListBase } from "@react-navigation/native";
 import { UserInfo } from "../constants";
 
 WebBrowser.maybeCompleteAuthSession();
 const SignUp = () => {
-  const router = useRouter();
-  const { navigate } = useNavigation();
-
+  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
   interface FullnameState {
     firstName: string;
     lastName: string;
@@ -37,7 +35,7 @@ const SignUp = () => {
     password: "",
     profilePicture: null,
   });
-  console.log(`userInfo==>`,userInfo);
+  console.log(`userInfo==>`, userInfo);
   const onHandleChange = ({
     field,
     value,
@@ -68,7 +66,11 @@ const SignUp = () => {
         body: formData,
       });
       const submitted = await submit.json();
-      console.log(submitted);
+      if (submitted.status) {
+        navigation.navigate("SignIn");
+      } else {
+        alert(submitted.message);
+      }
     } catch (err: any) {
       console.log(err.message);
     }
@@ -93,6 +95,7 @@ const SignUp = () => {
             //   </Text>
             // </TouchableOpacity>
             <TextInput
+              key="label"
               value={userInfo[name as keyof FullnameState]}
               onChangeText={(value) =>
                 onHandleChange({ field: name as keyof FullnameState, value })

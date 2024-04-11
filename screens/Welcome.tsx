@@ -27,8 +27,6 @@ const Welcome = () => {
       "276191175383-fitfq7bqkbi3bp7irol7vk8u7e96aro5.apps.googleusercontent.com",
     iosClientId:
       "276191175383-7mke6hp95aibh2bt1ne8vc1lhv3omk70.apps.googleusercontent.com",
-    // webClientId:
-    //   "276191175383-chv89i65r0p35hck2vd6pbqlaa6dsin4.apps.googleusercontent.com",
   });
 
   // FACEBOOK API

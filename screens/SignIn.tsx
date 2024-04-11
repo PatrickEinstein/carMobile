@@ -4,14 +4,16 @@ import { View, Text, Button, ScrollView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Buttons, { Buttons2 } from "../components/Buttton";
 import { useRouter } from "expo-router";
-import { useNavigation } from "@react-navigation/native";
+import { ParamListBase, useNavigation } from "@react-navigation/native";
 import * as WebBrowser from "expo-web-browser";
 import BootLoader from "../components/BootLoader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StackNavigationProp } from "@react-navigation/stack";
 WebBrowser.maybeCompleteAuthSession();
 
 const SignIn = () => {
-  const router = useRouter();
+  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
+
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -22,7 +24,7 @@ const SignIn = () => {
   const Submit = async () => {
     try {
       console.log(load);
-      const submit = await fetch("http://192.168.43.167:4200/api/login", {
+      const submit = await fetch("http://192.168.43.210:4200/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,10 +36,15 @@ const SignIn = () => {
       });
 
       const submitted = await submit.json();
-      console.log(submitted.token);
+
       if (submitted.status == true) {
         await AsyncStorage.setItem("@token", submitted.token);
         await AsyncStorage.setItem("@user", submitted.responseData);
+        if (submitted.status) {
+          navigation.navigate("Home");
+        } else {
+          alert(submitted.message);
+        }
       }
     } catch (err: any) {
       console.log(`err==>`, err.message);
