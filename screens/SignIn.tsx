@@ -9,6 +9,7 @@ import * as WebBrowser from "expo-web-browser";
 import BootLoader from "../components/BootLoader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { Login } from "../Fetches/services";
 WebBrowser.maybeCompleteAuthSession();
 
 const SignIn = () => {
@@ -21,35 +22,19 @@ const SignIn = () => {
     email: email,
     password: password,
   };
-  const Submit = async () => {
-    try {
-      console.log(load);
-      const submit = await fetch("http://192.168.43.210:4200/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      });
 
-      const submitted = await submit.json();
-
-      if (submitted.status == true) {
-        await AsyncStorage.setItem("@token", submitted.token);
-        await AsyncStorage.setItem("@user", submitted.responseData);
-        if (submitted.status) {
-          navigation.navigate("Home");
-        } else {
-          alert(submitted.message);
-        }
-      }
-    } catch (err: any) {
-      console.log(`err==>`, err.message);
+  const Submit = useCallback(async () => {
+    const res = await Login(load);
+    console.log(`res`,res);
+    if (res.status == true) {
+      await AsyncStorage.setItem("@token", res.token);
+      await AsyncStorage.setItem("@user", JSON.stringify(res.responseData));
+      navigation.navigate("Home");
+    } else {
+      alert(`${res.error}`);
     }
-  };
+  }, [load]);
+
 
   return (
     <ScrollView

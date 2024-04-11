@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { TextInput, Button } from "react-native-paper";
 import {
   Platform,
@@ -14,6 +14,7 @@ import * as WebBrowser from "expo-web-browser";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
 import { UserInfo } from "../constants";
+import { Register } from "../Fetches/services";
 
 WebBrowser.maybeCompleteAuthSession();
 const SignUp = () => {
@@ -56,25 +57,16 @@ const SignUp = () => {
   formData.append("phoneNumber", userInfo.phoneNumber);
   formData.append("password", userInfo.password);
   // formData.append("profilePicture", userInfo.profilePicture);
-  const Submit = async () => {
-    try {
-      const submit = await fetch("http://192.168.43.167:4200/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body: formData,
-      });
-      const submitted = await submit.json();
-      if (submitted.status) {
-        navigation.navigate("SignIn");
-      } else {
-        alert(submitted.message);
-      }
-    } catch (err: any) {
-      console.log(err.message);
+
+  const Submit = useCallback(async () => {
+    const res = await Register(formData);
+    console.log(res)
+    if (res.success == true) {
+      navigation.navigate("SignIn");
+    } else {
+      alert(`${res.message}`);
     }
-  };
+  }, [formData]);
 
   return (
     <ScrollView
